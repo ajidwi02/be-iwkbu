@@ -10,7 +10,7 @@ import (
 func SamsatLokPwkMGLHandler(w http.ResponseWriter, r *http.Request){
 	utils.EnableCORS(w)
 	if r.Method == "OPTIONS" {
-		returnc
+		return
 	}
 	url := "https://docs.google.com/spreadsheets/d/14qJDOG1KR8_BxOMgDbgxosnXtl-45enkNT1e3yXgmTU/gviz/tq?tqx=out:csv&sheet=14%20Lok%20Pwk%20MGL"
 	data, err := services.FetchLokPwkMGLData(url)

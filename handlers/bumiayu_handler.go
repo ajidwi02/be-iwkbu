@@ -12,8 +12,7 @@ func SamsatBumiayuHandler(w http.ResponseWriter, r *http.Request){
 	if r.Method == "OPTIONS" {
 		return
 	}
-	url := "https://docs.google.com/spreadsheets/d/14qJDOG1KR8_BxOMgDbgxosnXtl-45enkNT1e3yXgmTU/gviz/tq?tqx=out:csv&sheet=37
-	// z%20Bumiayu"
+	url := "https://docs.google.com/spreadsheets/d/14qJDOG1KR8_BxOMgDbgxosnXtl-45enkNT1e3yXgmTU/gviz/tq?tqx=out:csv&sheet=37%20Bumiayu"
 	data, err := services.FetchBumiayuData(url)
 	if err != nil {
 		http.Error(w, "Gagal mengambil data dari sheet Bumiayu: "+err.Error(), http.StatusInternalServerError)

@@ -10,7 +10,7 @@ import (
 func SamsatDelangguHandler(w http.ResponseWriter, r *http.Request){
 	utils.EnableCORS(w)
 	if r.Method == "OPTIONS" {
-		returnc
+		return
 	}
 	url := "https://docs.google.com/spreadsheets/d/14qJDOG1KR8_BxOMgDbgxosnXtl-45enkNT1e3yXgmTU/gviz/tq?tqx=out:csv&sheet=13%20Delanggu"
 	data, err := services.FetchDelangguData(url)

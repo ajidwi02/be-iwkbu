@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func FetchUngaranData(sheetURL string) ([]models.LoketData, error) {
+func FetchTegalData(sheetURL string) ([]models.LoketData, error) {
 	resp, err := http.Get(sheetURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch CSV: %w", err)
