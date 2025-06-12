@@ -1,32 +1,34 @@
-# Gunakan base image Golang untuk build
-FROM golang:1.21 AS builder
+# Gunakan base image Go
+FROM golang:1.21-alpine
 
-# Set work directory
+# Set environment variables
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64
+
+# Buat direktori kerja dalam container
 WORKDIR /app
 
-# Copy go.mod dan go.sum
+# Salin file go.mod dan go.sum
 COPY go.mod go.sum ./
 
-# Download dependencies terlebih dahulu
+# Download dependensi
 RUN go mod download
 
-# Salin seluruh kode ke image
+# Salin semua file source code
 COPY . .
 
-# Build aplikasi Go
-RUN go build -o app .
+# Build aplikasi
+RUN go build -o main .
 
-# Gunakan base image kecil untuk run app
-FROM debian:bullseye-slim
+# Gunakan image kecil untuk runtime
+FROM alpine:latest  
+WORKDIR /root/
+COPY --from=0 /app/main .
 
-# Set working directory
-WORKDIR /app
-
-# Salin hasil build dari stage sebelumnya
-COPY --from=builder /app/app .
-
-# Expose port aplikasi
+# Port aplikasi
 EXPOSE 8080
 
 # Jalankan aplikasi
-CMD ["./app"]
+CMD ["./main"]
